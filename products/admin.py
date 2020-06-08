@@ -3,7 +3,10 @@ from .models import Product, Offer
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'stock')
+    # # Manually display fields
+    # list_display = ('name', 'price', 'stock')
+    # display all fields
+    list_display = list(Product().__dict__.keys())[1:]
 
 
 class OfferAdmin(admin.ModelAdmin):

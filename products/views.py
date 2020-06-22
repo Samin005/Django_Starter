@@ -1,6 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Product
+from .models import Product, Offer
+
+from rest_framework import viewsets
+from .serializers import ProductSerializer, OfferSerializer
+
+
+class ProductsAPIAll(viewsets.ModelViewSet):
+    queryset = Product.objects.all().order_by('name')
+    serializer_class = ProductSerializer
+
+
+class OffersAPIAll(viewsets.ModelViewSet):
+    queryset = Offer.objects.all()
+    serializer_class = OfferSerializer
 
 
 def index(request):

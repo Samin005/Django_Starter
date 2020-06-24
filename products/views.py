@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Product, Offer
 
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from .serializers import ProductSerializer, OfferSerializer
 
 
 class ProductsAPIAll(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('name')
     serializer_class = ProductSerializer
+    permission_classes = [permissions.DjangoModelPermissions]
 
 
 class OffersAPIAll(viewsets.ModelViewSet):

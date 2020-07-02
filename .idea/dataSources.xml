@@ -9,5 +9,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:D:\Softwares\PyCharm 2020.1.1\Projects\Django_Starter\db.sqlite3</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="Django_Starter_DB" uuid="33c298f8-8f1b-4305-9c92-ac87306be3a1">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/Django_Starter_DB</jdbc-url>
+    </data-source>
   </component>
 </project>

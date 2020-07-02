@@ -38,7 +38,7 @@ INSTALLED_APPS = [
 
     # third party apps
     'rest_framework',
-    
+
     # local apps
     'products.apps.ProductsConfig',
     'polls.apps.PollsConfig'
@@ -79,9 +79,17 @@ WSGI_APPLICATION = 'Django_Starter.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Django_Starter_DB',
+        'USER': 'postgres',
+        'PASSWORD': 'samin005',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 # Password validation

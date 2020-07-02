@@ -13,7 +13,7 @@ class ProductsAPIAll(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
 
     def update(self, request, *args, **kwargs):
-        product_creator_user_id = 2
+        product_creator_user_id = 1
         if request.user.id != product_creator_user_id:
             return Response(status=status.HTTP_401_UNAUTHORIZED, data={
                 'detail': f'You are not allowed to update product {self.get_object().name}({self.get_object().id})'

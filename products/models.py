@@ -18,4 +18,4 @@ class Offer(models.Model):
     discount = models.FloatField(default=0.0)
 
     def __str__(self):
-        return self.description
+        return self.code + ' - ' + self.description

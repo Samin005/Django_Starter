@@ -12,11 +12,12 @@ class ProductAdmin(admin.ModelAdmin):
     # list_display = ('name', 'price', 'stock')
     # display all fields
     list_display = list(Product().__dict__.keys())[1:]
-    # inlines = [OfferInLine]
+    autocomplete_fields = ['offer']
 
 
 class OfferAdmin(admin.ModelAdmin):
     list_display = ('code', 'description', 'discount')
+    search_fields = ['description', 'code']
     inlines = [ProductInLine]
 
 

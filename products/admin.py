@@ -2,9 +2,9 @@ from django.contrib import admin
 from .models import Product, Offer
 
 
-class OfferInLine(admin.StackedInline):
-    model = Offer
-    max_num = 1
+class ProductInLine(admin.TabularInline):
+    model = Product
+    extra = 1
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -17,6 +17,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class OfferAdmin(admin.ModelAdmin):
     list_display = ('code', 'description', 'discount')
+    inlines = [ProductInLine]
 
 
 admin.site.register(Product, ProductAdmin)

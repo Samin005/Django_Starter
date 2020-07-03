@@ -12,6 +12,10 @@ class Product(models.Model):
 
 
 class Offer(models.Model):
+    products = models.ManyToManyField(Product)
     code = models.CharField(max_length=7)
     description = models.CharField(max_length=255)
     discount = models.FloatField(default=0.0)
+
+    def __str__(self):
+        return self.description

@@ -6,7 +6,7 @@ class Product(models.Model):
     price = models.FloatField()
     stock = models.IntegerField()
     image_url = models.CharField(max_length=2083)
-    offer = models.ForeignKey('Offer', on_delete=models.CASCADE, default=1)
+    offer = models.ForeignKey('Offer', on_delete=models.CASCADE, default=1, related_name='products')
 
     def __str__(self):
         return self.name

@@ -11,5 +11,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('new/', views.new, name='new'),
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('accounts/', include('allauth.urls'))
 ]

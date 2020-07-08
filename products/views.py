@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Product, Offer
+from .apps import ProductsConfig
+from Django_Starter import views
 
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
@@ -28,6 +30,7 @@ class OffersAPIAll(viewsets.ModelViewSet):
 
 
 def index(request):
+    views.current_app = ProductsConfig.name
     return render(request, 'products/index.html', {'products': Product.objects.all()})
 
 

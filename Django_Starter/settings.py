@@ -26,6 +26,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,14 +43,33 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # third party apps
     'rest_framework',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 
     # local apps
     'products.apps.ProductsConfig',
     'polls.apps.PollsConfig'
 ]
+
+# Provider specific settings
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,6 +149,18 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+root_url = 'http://127.0.0.1:8000/'
+
+SITE_ID = 2
+
+ACCOUNT_LOGOUT_ON_GET = True  # not recommended
+
+ACCOUNT_LOGOUT_REDIRECT_URL = root_url+'accounts/profile'
+
+LOGIN_REDIRECT_URL = root_url+'accounts/profile'  # this is the default value
+
+# ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

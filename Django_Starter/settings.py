@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'corsheaders',
 
     # local apps
     'products.apps.ProductsConfig',
@@ -72,6 +73,8 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -161,6 +164,10 @@ ACCOUNT_LOGOUT_REDIRECT_URL = root_url+'accounts/profile'
 LOGIN_REDIRECT_URL = root_url+'accounts/profile'  # this is the default value
 
 # ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:4200'
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

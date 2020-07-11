@@ -4,9 +4,9 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
+from Django_Starter import views, settings
 from .apps import PollsConfig
 from .models import Question, Choice
-from Django_Starter import views
 
 
 # def index(request):
@@ -30,7 +30,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
-        views.current_app = PollsConfig.name
+        views.redirect_url = settings.root_url + PollsConfig.name + '/'
         """Return the last five published questions."""
         return Question.objects.filter(
             pub_date__lte=timezone.now()

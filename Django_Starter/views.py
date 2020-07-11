@@ -1,8 +1,7 @@
 from django.shortcuts import redirect
-from . import settings
 
-current_app = ''
+redirect_url = ''
 
 
 def redirect_to_app(request):
-    return redirect(settings.root_url+current_app+'/')
+    return redirect(redirect_url)

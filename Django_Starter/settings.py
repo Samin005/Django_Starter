@@ -166,7 +166,8 @@ LOGIN_REDIRECT_URL = root_url+'accounts/profile'  # this is the default value
 # ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:4200'
+    'http://localhost:4200',
+    'http://127.0.0.1:4200'
 ]
 
 # Static files (CSS, JavaScript, Images)

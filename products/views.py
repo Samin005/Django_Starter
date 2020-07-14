@@ -10,8 +10,10 @@ from .serializers import ProductSerializer, OfferSerializer, UserSerializer
 
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework import viewsets, permissions, status
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication, BasicAuthentication
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
 from rest_framework.response import Response
+
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class ProductsAPIAll(viewsets.ModelViewSet):
@@ -38,6 +40,7 @@ class UserAPIAll(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
 
 @api_view(['POST'])
@@ -48,7 +51,7 @@ def set_redirect_url(request):
 
 @api_view(['GET', 'POST'])
 @permission_classes([permissions.IsAuthenticated])
-@authentication_classes([TokenAuthentication, SessionAuthentication, BasicAuthentication])
+@authentication_classes([TokenAuthentication, BasicAuthentication])
 def get_current_user(request):
     # Auth-token
     if request.method == 'GET':
@@ -68,11 +71,21 @@ def get_current_user(request):
 
 
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
-def logout_user(request):
+@authentication_classes([JWTAuthentication])
+def login_user(request):
     if request.user.is_authenticated:
-        request.user.auth_token.delete()
-        print('token deleted')
+        login(request, request.user, backend='rest_framework_simplejwt.authentication.JWTAuthentication')
+        print(request.user.username + ' has logged in')
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@authentication_classes([JWTAuthentication, TokenAuthentication, BasicAuthentication])
+def logout_user(request):
+    # if request.user.is_authenticated:
+    #     request.user.auth_token.delete()
+    #     print('token deleted')
     logout(request)
     print('logged out')
     serializer = UserSerializer(request.user)

@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from datetime import timedelta
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -165,6 +167,10 @@ ACCOUNT_LOGOUT_REDIRECT_URL = root_url+'accounts/profile'
 LOGIN_REDIRECT_URL = root_url+'accounts/profile'  # this is the default value
 
 # ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+}
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:4200',

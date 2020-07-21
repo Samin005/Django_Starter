@@ -40,7 +40,7 @@ class UserAPIAll(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
-    authentication_classes = [JWTAuthentication]
+    authentication_classes = [JWTAuthentication, TokenAuthentication]
 
 
 @api_view(['POST'])

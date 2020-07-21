@@ -50,8 +50,10 @@ INSTALLED_APPS = [
     # third party apps
     'rest_framework',
     'rest_framework.authtoken',
+    'dj_rest_auth',
     'allauth',
     'allauth.account',
+    'dj_rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'corsheaders',
@@ -160,7 +162,7 @@ root_url = 'http://127.0.0.1:8000/'
 
 SITE_ID = 2
 
-ACCOUNT_LOGOUT_ON_GET = True  # not recommended
+# ACCOUNT_LOGOUT_ON_GET = True  # not recommended
 
 ACCOUNT_LOGOUT_REDIRECT_URL = root_url+'accounts/profile'
 
@@ -168,8 +170,16 @@ LOGIN_REDIRECT_URL = root_url+'accounts/profile'  # this is the default value
 
 # ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
 }
 
 CORS_ORIGIN_WHITELIST = [

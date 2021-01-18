@@ -11,6 +11,7 @@ from .serializers import ProductSerializer, OfferSerializer, UserSerializer
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework import viewsets, permissions, status
 from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -99,3 +100,13 @@ def index(request):
 
 def new(request):
     return HttpResponse('New Product')
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def google_logout(request):
+    message = f'{request.user} has successfully logged out.'
+    request.user.auth_token.delete()
+    print("Token deleted\n", message)
+    return Response(message)

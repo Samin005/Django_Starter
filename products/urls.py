@@ -34,6 +34,7 @@ urlpatterns = [
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
+    path('dj-rest-auth/google/logout/', views.google_logout, name='google_logout'),
     path('user/', views.login_user, name='user'),
     path('current-user/', views.get_current_user, name='current-user'),
     path('user/logout/', views.logout_user, name='logout'),
